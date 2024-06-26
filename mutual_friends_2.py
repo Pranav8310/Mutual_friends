@@ -42,7 +42,7 @@ if __name__ == "__main__":
     friend_list_rdd = spark.sparkContext.parallelize(friend_list)
 
     # Convert RDD to key value pairs, get the mutual friends (intersection of friend lists)
-    output = friend_list_rdd.map(lambda x: (x[0], x[1])).reduceByKey(lambda x, y: list(set(x).intersection(y)))
+    output = friend_list_rdd.map(lambda x: (x[0], x[1])).reduceByKey(lambda x, y: list(set(x).intersection(y))) #if you don't want list of mutual friends and just want length you can add len insted of list
 
     # Generate the output folder
     output.coalesce(1).saveAsTextFile("out1.txt")
